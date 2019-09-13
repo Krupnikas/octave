@@ -48,7 +48,7 @@ function strToHex(string) {
 	return hexData
 }
 
-var zeros = new Array(3000).fill(0)
+var zeros = new Array(5000).fill(0)
 
 function hexToSamples(hexData) {
 	samples = []
@@ -57,7 +57,6 @@ function hexToSamples(hexData) {
 		samples = samples.concat(get_segment(freq))
 	}
 
-	samples = zeros.concat(samples) 
 	samples = samples.concat(zeros) // remove scratch
 	return samples
 }
@@ -69,21 +68,29 @@ function playSamples(samples) {
 
 	index = 0
 
-	var player = new Pizzicato.Sound(function(e) {
+	var player = new Pizzicato.Sound({
+	    source: 'script',
+	    options: {
+	    	bufferSize: 2048,
+	        audioFunction: function(e) {
+	        	console.log(e.outputBuffer.length)
 
-		if (index >= samples.length) {
-			window.player.stop()
-			document.getElementById("play_button").classList.remove("pulse")
-			console.log("Done")
-			return
-		}
+				if (index >= samples.length) {
+					window.player.stop()
+					document.getElementById("play_button").classList.remove("pulse")
+					console.log("Done")
+					return
+				}
 
-	    var output = e.outputBuffer.getChannelData(0);
-	    for (var i = 0; i < e.outputBuffer.length && index < samples.length; i++)
-	    {
-	        output[i] = samples[index]
-	    	index++;
+			    var output = e.outputBuffer.getChannelData(0);
+			    for (var i = 0; i < e.outputBuffer.length && index < samples.length; i++)
+			    {
+			        output[i] = samples[index]
+			    	index++;
+			    }
+	    	}
 	    }
+
 	});
 
 	window.player = player
