@@ -11,10 +11,11 @@ html, body {
 	width: 100vw;
 	height: 100vh;
 	height: calc(var(--vh, 1vh) * 100);
-	font-family: 'Roboto', sans-serif;
+	background: linear-gradient(#FCCB90, #D57EEB);
 }
 
 input, button {
+	font-family: 'Roboto', sans-serif;
 	max-width: 300px;
 	margin: 20px auto;
 	text-align: center;
@@ -22,7 +23,7 @@ input, button {
 
 input {
  border: 0;
- border-bottom: 2px solid grey;
+ border-bottom: 2px solid white;
  width: 100%;
  font-size: 30px;
  line-height: 35px;
@@ -30,22 +31,34 @@ input {
  text-align: center;
  padding: 10px;
  background: transparent;
- color: darkgrey;
+ color: rgba(255, 255, 255, 0.5);
 }
 
 input:focus {
  outline: 0;
- color: darkgrey;
+ color: white;
 }
 
 input::placeholder {
- color: lightgrey;
+ color: rgba(255, 255, 255, 0.5);
+}
+
+button {
+ background: transparent;
+ border: solid rgba(255, 255, 255, 0.5) 2px;
+ height: 50px;
+ width: 150px;
+ border-radius: 25px;
+ color: rgba(255, 255, 255, 0.5);
+}
+
+button:focus {
+ outline: 0;
 }
 
 .active {
- box-shadow: none;
- background-color: #1976D2;
- color: #fff;
+ border-color: white;
+ color: white;
 }
 
 .center_wrapper {
@@ -60,4 +73,20 @@ input::placeholder {
 	align-content:center;
 	flex-direction:column;
 	display: flex;
+}
+
+.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yp {
+  font-family: 'Roboto', sans-serif;
+  font-size: 100px;
+  background: #FA709A;
+  color: #FEE140;
 }

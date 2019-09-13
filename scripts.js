@@ -101,32 +101,22 @@ function get_segment(freq, length = Pizzicato.context.sampleRate / 10, ampl = 1,
     return segment
 }
 
-function onInputChange() {
+function onDataChange(event) {
+	if (event.keyCode == 13) {
+        onButtonClick();
+        return;
+    }
 	data = document.getElementById("data").value
+	console.log(data)
 	if (data) {
-		document.getElementById("play_button").addClass("active");
+		document.getElementById("data").classList.add("active");
+		document.getElementById("play_button").classList.add("active");
 	} else {
-		document.getElementById("play_button").removeClass("active");
+		document.getElementById("play_button").classList.remove("active");
+		document.getElementById("data").classList.remove("active");
 	}	
 }
 
 window.onload = function() {
 	document.getElementById("data").focus();
 }
-
-// window.onload = function() {
-// 	arr = []
-// 	for (var i = 1; i <= 2 * 4410; i++)
-// 		arr.push(i)
-
-// 	res = get_segment(100)
-// 	res = res.concat(get_segment(200))
-
-// 	var trace2 = {
-// 	  x: arr,
-// 	  y: res,
-// 	  type: 'scatter'
-// 	};
-// 	var data = [trace2];
-// 	Plotly.newPlot('myDiv', data, {}, {showSendToCloud: true});
-// }
