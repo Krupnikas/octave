@@ -23,6 +23,7 @@ input, button {
 
 input {
  border: 0;
+ border-radius: 0px;
  border-bottom: 2px solid white;
  width: 100%;
  font-size: 30px;

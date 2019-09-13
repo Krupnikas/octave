@@ -33,9 +33,9 @@ freqs = {'0': 261.63,
 		 'a': 698.46,
 		 'b': 784.0,
 		 'c': 880.0,
-		 'd': 987.76,
-		 'e': 1046.52,
-		 'f': 1174.64}
+		 'd': 987.75,
+		 'e': 1046.50,
+		 'f': 1174.60}
 
 function strToHex(string) {
 	var utf8 = unescape(encodeURIComponent(string));
