@@ -13,6 +13,8 @@ function onButtonClick() {
 		return
 	}
 
+	document.getElementById("play_button").classList.add("pulse")
+
 	hexData = strToHex(data)
 	samplesData = hexToSamples(hexData)
 	playSamples(samplesData)
@@ -69,6 +71,7 @@ function playSamples(samples) {
 
 		if (index >= samples.length) {
 			window.player.stop()
+			document.getElementById("play_button").classList.remove("pulse")
 			console.log("Done")
 			return
 		}

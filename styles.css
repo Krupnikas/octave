@@ -75,18 +75,34 @@ button:focus {
 	display: flex;
 }
 
-.circle {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.pulse {
+  background: transparent;
+  cursor: pointer;
+  position:relative;
 }
 
-.yp {
-  font-family: 'Roboto', sans-serif;
-  font-size: 100px;
-  background: #FA709A;
-  color: #FEE140;
+.pulse:after {
+  content:"";
+  display:block;
+  width: 150px;
+  height: 50px;
+  border-radius: 50px;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border: 2px solid white;
+  position:absolute;
+  top:-4px;
+  left:-4px;
+  animation: pulse 300ms ease 100ms infinite;
+}
+
+@keyframes pulse {
+  0% {
+      opacity: 0.5;
+      transform: scale(1);
+  }
+  100% {
+      opacity: 0;
+      transform: scale(1.2);
+  }
 }
