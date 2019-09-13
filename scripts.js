@@ -16,6 +16,7 @@ function onButtonClick() {
 	document.getElementById("play_button").classList.add("pulse")
 
 	hexData = strToHex(data)
+	console.log("transmitting: ", hexData)
 	samplesData = hexToSamples(hexData)
 	playSamples(samplesData)
 }
@@ -56,6 +57,7 @@ function hexToSamples(hexData) {
 		samples = samples.concat(get_segment(freq))
 	}
 
+	samples = zeros.concat(samples) 
 	samples = samples.concat(zeros) // remove scratch
 	return samples
 }
@@ -110,7 +112,6 @@ function onDataChange(event) {
         return;
     }
 	data = document.getElementById("data").value
-	console.log(data)
 	if (data) {
 		document.getElementById("data").classList.add("active");
 		document.getElementById("play_button").classList.add("active");
