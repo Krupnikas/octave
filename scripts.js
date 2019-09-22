@@ -9,14 +9,12 @@ function onButtonClick() {
 	data = document.getElementById("data").value
 	if (!data)
 	{
-		console.log("No data")
 		return
 	}
 
 	document.getElementById("play_button").classList.add("pulse")
 
 	hexData = strToHex(data)
-	console.log("transmitting: ", hexData)
 	samplesData = hexToSamples(hexData)
 	playSamples(samplesData)
 }
@@ -73,12 +71,10 @@ function playSamples(samples) {
 	    options: {
 	    	bufferSize: 2048,
 	        audioFunction: function(e) {
-	        	console.log(e.outputBuffer.length)
 
 				if (index >= samples.length) {
 					window.player.stop()
 					document.getElementById("play_button").classList.remove("pulse")
-					console.log("Done")
 					return
 				}
 
@@ -103,7 +99,6 @@ function signalWindow(index, length) {
 
 function get_segment(freq, length = Pizzicato.context.sampleRate / 10, ampl = 1, samplerate = Pizzicato.context.sampleRate) {
     var segment = []
-    console.log(freq)
     for (var i = 0; i < length; i++) {
         var sample = ampl 
         sample *= Math.sin(2 * Math.PI * freq * i / samplerate)
@@ -145,7 +140,6 @@ window.onload = function() {
 function fillPageWithLang(lang, message){
 	document.getElementById("data").placeholder = langs[lang].placeholder
 	document.getElementById("data").value = message
-	console.log(document.getElementById("play_button").innerText)
 	document.getElementById("play_button").innerText = langs[lang].button
 	document.getElementById("support").innerText = langs[lang].support
 	document.getElementById("support").href = langs[lang].link
