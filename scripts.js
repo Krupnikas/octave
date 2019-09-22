@@ -114,7 +114,7 @@ function get_segment(freq, length = Pizzicato.context.sampleRate / 10, ampl = 1,
 }
 
 function onDataChange(event) {
-	if (event.keyCode == 13) {
+	if (event && event.keyCode == 13) {
         onButtonClick();
         return;
     }
@@ -129,7 +129,27 @@ function onDataChange(event) {
 }
 
 window.onload = function() {
+	
+	const urlParams = new URLSearchParams(window.location.search);
+	var lang = urlParams.get('lang');
+	if (!lang)
+		lang = "en"
+	var message = urlParams.get('message');
+	if (!message)
+		message = langs[lang].default
+	fillPageWithLang(lang, message)
+
 	document.getElementById("data").focus();
+}
+
+function fillPageWithLang(lang, message){
+	document.getElementById("data").placeholder = langs[lang].placeholder
+	document.getElementById("data").value = message
+	console.log(document.getElementById("play_button").innerText)
+	document.getElementById("play_button").innerText = langs[lang].button
+	document.getElementById("support").innerText = langs[lang].support
+	document.getElementById("support").href = langs[lang].link
+	onDataChange()
 }
 
 let vh = window.innerHeight * 0.01;
