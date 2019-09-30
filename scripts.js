@@ -20,10 +20,9 @@ function onButtonClick() {
 
 	ga('send', {
 	  hitType: 'event',
-	  eventCategory: action,
+	  eventCategory: "play",
 	  eventAction: data
 	});
-
 }
 
 freqs = {'0': 261.63,
