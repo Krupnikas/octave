@@ -14,11 +14,23 @@ html, body {
 	background: linear-gradient(#FCCB90, #D57EEB);
 }
 
-input, button {
+input, button, a {
 	font-family: 'Roboto', sans-serif;
 	max-width: 300px;
 	margin: 20px auto;
 	text-align: center;
+}
+
+#footer {
+	bottom: 0;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+#support {
+	color: rgba(255, 255, 255, 0.5);
 }
 
 input {
@@ -51,6 +63,10 @@ button {
  width: 150px;
  border-radius: 25px;
  color: rgba(255, 255, 255, 0.5);
+}
+
+button:hover {
+	cursor: pointer;
 }
 
 button:focus {

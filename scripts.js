@@ -9,7 +9,6 @@ function onButtonClick() {
 	data = document.getElementById("data").value
 	if (!data)
 	{
-		console.log("No data")
 		return
 	}
 
@@ -54,7 +53,7 @@ function strToHex(string) {
 	return hexData
 }
 
-var zeros = new Array(3000).fill(0)
+var zeros = new Array(5000).fill(0)
 
 function hexToSamples(hexData) {
 	samples = []
@@ -74,21 +73,27 @@ function playSamples(samples) {
 
 	index = 0
 
-	var player = new Pizzicato.Sound(function(e) {
+	var player = new Pizzicato.Sound({
+	    source: 'script',
+	    options: {
+	    	bufferSize: 2048,
+	        audioFunction: function(e) {
 
-		if (index >= samples.length) {
-			window.player.stop()
-			document.getElementById("play_button").classList.remove("pulse")
-			console.log("Done")
-			return
-		}
+				if (index >= samples.length) {
+					window.player.stop()
+					document.getElementById("play_button").classList.remove("pulse")
+					return
+				}
 
-	    var output = e.outputBuffer.getChannelData(0);
-	    for (var i = 0; i < e.outputBuffer.length && index < samples.length; i++)
-	    {
-	        output[i] = samples[index]
-	    	index++;
+			    var output = e.outputBuffer.getChannelData(0);
+			    for (var i = 0; i < e.outputBuffer.length && index < samples.length; i++)
+			    {
+			        output[i] = samples[index]
+			    	index++;
+			    }
+	    	}
 	    }
+
 	});
 
 	window.player = player
@@ -101,7 +106,6 @@ function signalWindow(index, length) {
 
 function get_segment(freq, length = Pizzicato.context.sampleRate / 10, ampl = 1, samplerate = Pizzicato.context.sampleRate) {
     var segment = []
-    console.log(freq)
     for (var i = 0; i < length; i++) {
         var sample = ampl 
         sample *= Math.sin(2 * Math.PI * freq * i / samplerate)
@@ -112,12 +116,11 @@ function get_segment(freq, length = Pizzicato.context.sampleRate / 10, ampl = 1,
 }
 
 function onDataChange(event) {
-	if (event.keyCode == 13) {
+	if (event && event.keyCode == 13) {
         onButtonClick();
         return;
     }
 	data = document.getElementById("data").value
-	console.log(data)
 	if (data) {
 		document.getElementById("data").classList.add("active");
 		document.getElementById("play_button").classList.add("active");
@@ -128,5 +131,27 @@ function onDataChange(event) {
 }
 
 window.onload = function() {
+	
+	const urlParams = new URLSearchParams(window.location.search);
+	var lang = urlParams.get('lang');
+	if (!lang)
+		lang = "en"
+	var message = urlParams.get('message');
+	if (!message)
+		message = langs[lang].default
+	fillPageWithLang(lang, message)
+
 	document.getElementById("data").focus();
 }
+
+function fillPageWithLang(lang, message){
+	document.getElementById("data").placeholder = langs[lang].placeholder
+	document.getElementById("data").value = message
+	document.getElementById("play_button").innerText = langs[lang].button
+	document.getElementById("support").innerText = langs[lang].support
+	document.getElementById("support").href = langs[lang].link
+	onDataChange()
+}
+
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
