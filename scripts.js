@@ -18,6 +18,13 @@ function onButtonClick() {
 	hexData = strToHex(data)
 	samplesData = hexToSamples(hexData)
 	playSamples(samplesData)
+
+	ga('send', {
+	  hitType: 'event',
+	  eventCategory: action,
+	  eventAction: data
+	});
+
 }
 
 freqs = {'0': 261.63,
